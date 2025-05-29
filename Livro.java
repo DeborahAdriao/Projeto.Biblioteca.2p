@@ -1,6 +1,8 @@
 package projeto.biblioteca;
 
-public class Livro {
+import java.io.Serializable;
+
+public class Livro implements Serializable {
     private static int contadorLivros = 0; // atributo static
 
     private String autor;

@@ -1,5 +1,7 @@
 package projeto.biblioteca;
 
+import java.io.Serializable;
+
 public class Leitor extends Pessoa{
     private String telefone;
 

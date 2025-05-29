@@ -1,7 +1,9 @@
 package projeto.biblioteca;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Biblioteca {
+public class Biblioteca implements Serializable {
     //declarando - atributos
     // ArrayList <TIPO> nome;
     private final ArrayList<Livro> livros;

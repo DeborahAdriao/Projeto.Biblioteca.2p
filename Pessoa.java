@@ -1,6 +1,7 @@
 package projeto.biblioteca;
+import java.io.Serializable;
 
-public class Pessoa {
+public class Pessoa implements Serializable{
     private String nome;
     private String cpf;
 

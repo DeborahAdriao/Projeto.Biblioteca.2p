@@ -55,6 +55,7 @@ public class Menu {
                         excluirAtuLeitor();
                         break;
                     case 0:
+                        Arquivo.salvarBiblioteca(biblioteca);
                         System.out.println("Até a próxima!");
                         break;
                     default:
