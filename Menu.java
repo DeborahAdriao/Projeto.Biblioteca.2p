@@ -22,10 +22,11 @@ public class Menu {
                 System.out.println("1. Cadastrar Livro");
                 System.out.println("2. Cadastrar Leitor");
                 System.out.println("3. Listar livros");
-                System.out.println("4. Realizar Empréstimo");
-                System.out.println("5. Registrar Devolução");
-                System.out.println("6. Excluir ou Atualizar cadastro de Livro");
-                System.out.println("7. Excluir ou Atualizar cadstro de Leitor");
+                System.out.println("4. Listar leitores");
+                System.out.println("5. Realizar Empréstimo");
+                System.out.println("6. Registrar Devolução");
+                System.out.println("7. Excluir ou Atualizar cadastro de Livro");
+                System.out.println("8. Excluir ou Atualizar cadstro de Leitor");
                 System.out.println("0. Sair");
 
                 System.out.println("Escolha uma opção: ");
@@ -43,20 +44,23 @@ public class Menu {
                         listarLivros();
                         break;
                     case 4:
-                        realizarEmprestimo();
+                        listarLeitores();
                         break;
                     case 5:
-                        registrarDevolucao();
+                        realizarEmprestimo();
                         break;
                     case 6:
-                        excluirAtuLivro();
+                        registrarDevolucao();
                         break;
                     case 7:
+                        excluirAtuLivro();
+                        break;
+                    case 8:
                         excluirAtuLeitor();
                         break;
                     case 0:
                         Arquivo.salvarBiblioteca(biblioteca);
-                        System.out.println("Até a próxima!");
+                        System.out.println("\nAté a próxima!");
                         break;
                     default:
                         System.out.println("Opção inválida!");
@@ -66,17 +70,17 @@ public class Menu {
                 scanner.nextLine(); // Limpa a entrada inválida
             }
         } while (opcao != 0);
-        System.out.println("Menu finalizado.");
+        System.out.println("\nMenu finalizado.");
     }
 
     private void cadastrarLivro() {
         try {
             System.out.println("Autor: ");
-            String autor = scanner.nextLine();
+            String autor = scanner.nextLine().trim().toUpperCase();
             System.out.println("Título: ");
-            String titulo = scanner.nextLine();
+            String titulo = scanner.nextLine().trim().toUpperCase();
             System.out.println("ID: ");
-            String id = scanner.nextLine();
+            String id = scanner.nextLine().trim();
             System.out.println("Estoque: ");
             int estoque = scanner.nextInt();
 
@@ -115,21 +119,21 @@ public class Menu {
 
     private void cadastrarLeitor() {
         System.out.print("Nome do leitor: ");
-        String nome = scanner.nextLine();
+        String nome = scanner.nextLine().trim().toUpperCase();
         System.out.print("CPF do leitor: ");
-        String cpf = scanner.nextLine();
+        String cpf = scanner.nextLine().trim();
 
         while (!validarCPF(cpf)) {
             System.out.println("CPF inválido! Digite novamente: ");
-            cpf = scanner.nextLine();
+            cpf = scanner.nextLine().trim();
         }
 
         System.out.println("Telefone do leitor: ");
-        String telefone = scanner.nextLine();
+        String telefone = scanner.nextLine().trim();
 
         while (!validarTelefone(telefone)) {
             System.out.println("Telefone inválido! Digite novamente: ");
-            telefone = scanner.nextLine();
+            telefone = scanner.nextLine().trim();
         }
 
         System.out.println("\nConfirma os dados abaixo para o cadastro? (S/N)");
@@ -163,9 +167,16 @@ public class Menu {
         System.out.println("Total de livros que já foram cadastrados: " + Livro.getContadorLivros());
     }
 
+    private void listarLeitores() {
+        System.out.println("--- LEITORES CADASTRADOS ---");
+        for (Leitor leitor : biblioteca.getLeitores()){
+            System.out.println(leitor.exibirInfo());
+        }
+    }
+
     private void realizarEmprestimo() {
         System.out.print("Informe o CPF do leitor: ");
-        String cpf = scanner.nextLine();
+        String cpf = scanner.nextLine().trim();
         // Procura o leitor
         Leitor leitorSelecionado = null;
         for (Leitor leitor : biblioteca.getLeitores()) {
@@ -175,11 +186,13 @@ public class Menu {
             }
         }
         if (leitorSelecionado == null) {
-            System.out.println("Leitor não encontrado.Volte ao início e faça o cadastro.");
+            System.out.println("Leitor não encontrado. Volte ao início e faça o cadastro.");
             return;
         }
-        System.out.print("Informe o ID do livro: ");
-        String idLivro = scanner.nextLine();
+        listarLivros();
+
+        System.out.print("\nInforme o ID do livro: ");
+        String idLivro = scanner.nextLine().trim();
         // Procura o livro
         Livro livroSelecionado = null;
         for (Livro livro : biblioteca.getLivros()) {
@@ -202,13 +215,13 @@ public class Menu {
         biblioteca.getEmprestimos().add(emprestimo); // Adiciona à lista de empréstimos
         livroSelecionado.setEstoque(livroSelecionado.getEstoque() - 1); // Decrementa estoque
 
-        System.out.println("Empréstimo realizado com sucesso! " +
+        System.out.println("\nEmpréstimo realizado com sucesso! " +
                 "\nVocê tem 7 dias para aproveitar <3.");
     }
 
     private void registrarDevolucao() {
         System.out.print("Digite o ID do livro: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
         boolean devolvido = false;
 
         //percorre todos os emprestimos
@@ -229,7 +242,7 @@ public class Menu {
     }
     private void excluirAtuLivro() {
         System.out.print("Digite o ID do livro: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
 
         Livro livro = biblioteca.buscarLivro(id);
 
@@ -250,9 +263,9 @@ public class Menu {
             System.out.println("Livro removido com sucesso!");
         } else if (opcao == 2) {
             System.out.print("Novo título: ");
-            String novoTitulo = scanner.nextLine();
+            String novoTitulo = scanner.nextLine().trim().toUpperCase();
             System.out.print("Novo autor: ");
-            String novoAutor = scanner.nextLine();
+            String novoAutor = scanner.nextLine().trim().toUpperCase();
             System.out.print("Novo estoque: ");
             int novoEstoque = scanner.nextInt();
             scanner.nextLine();
@@ -269,11 +282,11 @@ public class Menu {
 
     private void excluirAtuLeitor() {
         System.out.print("Digite o CPF do leitor: ");
-        String cpf = scanner.nextLine();
+        String cpf = scanner.nextLine().trim().toUpperCase();
 
         while (!validarCPF(cpf)) {
             System.out.println("CPF inválido! Digite novamente: ");
-            cpf = scanner.nextLine();
+            cpf = scanner.nextLine().trim();
         }
 
         Leitor leitorEncontrado = null;
@@ -301,13 +314,13 @@ public class Menu {
             System.out.println("Leitor removido com sucesso!");
         } else if (opcao == 2) {
             System.out.print("Novo nome: ");
-            String novoNome = scanner.nextLine();
+            String novoNome = scanner.nextLine().trim().toUpperCase();
             System.out.print("Novo telefone: ");
-            String novoTelefone = scanner.nextLine();
+            String novoTelefone = scanner.nextLine().trim();
 
             while (!validarTelefone(novoTelefone)) {
                 System.out.println("Telefone inválido! Digite novamente: ");
-                novoTelefone = scanner.nextLine();
+                novoTelefone = scanner.nextLine().trim();
             }
 
             leitorEncontrado.setNome(novoNome);
