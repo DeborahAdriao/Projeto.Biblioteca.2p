@@ -38,11 +38,10 @@ public class Emprestimo implements Serializable{
     }
 
     public String exibirDetalhes() {
-        return "-------------------------\n" +
+        return "----------------------------\n" +
                 "Leitor: " + leitor.getNome() +
                 "\nLivro: " + livro.getTitulo() +
                 "\nData do Empréstimo: " + dataEmprestimo +
-                "\nDevolvido: " + (devolvido ? "Sim" : "Não") +
-                "\n-------------------------";
+                "\n----------------------------";
     }
 }

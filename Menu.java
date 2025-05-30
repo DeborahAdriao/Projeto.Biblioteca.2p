@@ -2,8 +2,10 @@ package projeto.biblioteca;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-
+import java.time.LocalDate;
 import static projeto.biblioteca.Util.*;
+
+// trocar isbn!!!!!!!!!
 
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
@@ -60,7 +62,7 @@ public class Menu {
                         break;
                     case 0:
                         Arquivo.salvarBiblioteca(biblioteca);
-                        System.out.println("\nAté a próxima!");
+                        System.out.println("\nAté a próxima! <3");
                         break;
                     default:
                         System.out.println("Opção inválida!");
@@ -70,7 +72,7 @@ public class Menu {
                 scanner.nextLine(); // Limpa a entrada inválida
             }
         } while (opcao != 0);
-        System.out.println("\nMenu finalizado.");
+        System.out.println("Menu finalizado.");
     }
 
     private void cadastrarLivro() {
@@ -79,8 +81,8 @@ public class Menu {
             String autor = scanner.nextLine().trim().toUpperCase();
             System.out.println("Título: ");
             String titulo = scanner.nextLine().trim().toUpperCase();
-            System.out.println("ID: ");
-            String id = scanner.nextLine().trim();
+            System.out.println("ISBN: ");
+            String isbn = scanner.nextLine().trim();
             System.out.println("Estoque: ");
             int estoque = scanner.nextInt();
 
@@ -93,13 +95,13 @@ public class Menu {
             System.out.println("\nConfirma os dados abaixo para o cadastro? (S/N)");
             System.out.println("Autor: " + autor);
             System.out.println("Título: " + titulo);
-            System.out.println("ID: " + id);
+            System.out.println("ISBN: " + isbn);
             System.out.println("Estoque: " + estoque);
             System.out.print("-> ");
             String confirmacao = scanner.nextLine().trim().toUpperCase();
 
             if (confirmacao.equals("S")) {
-                Livro livro = new Livro(autor, titulo, id, estoque);
+                Livro livro = new Livro(autor, titulo, isbn, estoque);
                 biblioteca.adicionarLivro(livro);
                 System.out.println("Livro cadastrado com sucesso!");
             } else {
@@ -142,7 +144,6 @@ public class Menu {
         System.out.println("Telefone: " + telefone);
         System.out.print("-> ");
         String confirmacao = scanner.nextLine().trim().toUpperCase();
-        //(trim) remove os espaços em branco do início e do fim da string
 
         if (confirmacao.equals("S")) {
             Leitor leitor = new Leitor(nome, cpf, telefone);
@@ -164,7 +165,7 @@ public class Menu {
         for (Livro livro : biblioteca.getLivros()) {
             System.out.println(livro.exibirDetalhes(true));
         }
-        System.out.println("Total de livros que já foram cadastrados: " + Livro.getContadorLivros());
+        System.out.println("Total de livros que foram cadastrados hoje: " + Livro.getContadorLivros());
     }
 
     private void listarLeitores() {
@@ -191,12 +192,12 @@ public class Menu {
         }
         listarLivros();
 
-        System.out.print("\nInforme o ID do livro: ");
-        String idLivro = scanner.nextLine().trim();
+        System.out.print("\nInforme o ISBN do livro: ");
+        String isbnLivro = scanner.nextLine().trim();
         // Procura o livro
         Livro livroSelecionado = null;
         for (Livro livro : biblioteca.getLivros()) {
-            if (livro.getId().equals(idLivro)) {
+            if (livro.getIsbn().equals(isbnLivro)) {
                 livroSelecionado = livro;
                 break;
             }
@@ -215,19 +216,19 @@ public class Menu {
         biblioteca.getEmprestimos().add(emprestimo); // Adiciona à lista de empréstimos
         livroSelecionado.setEstoque(livroSelecionado.getEstoque() - 1); // Decrementa estoque
 
-        System.out.println("\nEmpréstimo realizado com sucesso! " +
-                "\nVocê tem 7 dias para aproveitar <3.");
+        System.out.println("\nEmpréstimo realizado com sucesso! ");
+        System.out.println("Data do empréstimo: " + emprestimo.getDataEmprestimo());
     }
 
     private void registrarDevolucao() {
-        System.out.print("Digite o ID do livro: ");
-        String id = scanner.nextLine().trim();
+        System.out.print("Digite o ISBN do livro: ");
+        String ISBN = scanner.nextLine().trim();
         boolean devolvido = false;
 
         //percorre todos os emprestimos
         for (Emprestimo emprestimo : biblioteca.getEmprestimos()) {
             // verifica se o empréstimo ainda não foi devolvido(!isDevolvido()).
-            if (emprestimo.getLivro().getId().equals(id) && !emprestimo.isDevolvido()) {
+            if (emprestimo.getLivro().getIsbn().equals(ISBN) && !emprestimo.isDevolvido()) {
                 emprestimo.setDevolvido(true); //marca o empréstimo como "devolvido"
                 emprestimo.getLivro().devolver(); // aumenta o estoque
                 System.out.println("Devolução registrada com sucesso!");
@@ -241,10 +242,10 @@ public class Menu {
         }
     }
     private void excluirAtuLivro() {
-        System.out.print("Digite o ID do livro: ");
-        String id = scanner.nextLine().trim();
+        System.out.print("Digite o ISBN do livro: ");
+        String isbn = scanner.nextLine().trim();
 
-        Livro livro = biblioteca.buscarLivro(id);
+        Livro livro = biblioteca.buscarLivro(isbn);
 
         if (livro == null) {
             System.out.println("Livro não encontrado.");
@@ -266,6 +267,7 @@ public class Menu {
             String novoTitulo = scanner.nextLine().trim().toUpperCase();
             System.out.print("Novo autor: ");
             String novoAutor = scanner.nextLine().trim().toUpperCase();
+            // trocar o isbn
             System.out.print("Novo estoque: ");
             int novoEstoque = scanner.nextInt();
             scanner.nextLine();

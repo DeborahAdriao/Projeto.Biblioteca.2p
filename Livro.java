@@ -7,24 +7,23 @@ public class Livro implements Serializable {
 
     private String autor;
     private String titulo;
-    private String id;
+    private String isbn;
     private int estoque;
 
     public Livro () {
         contadorLivros++;
     }
 
-    public Livro(String autor, String titulo, String id, int estoque){
+    public Livro(String autor, String titulo, String isbn, int estoque){
         // construtor
         this.titulo = titulo;
         this.autor = autor;
-        this.id = id;
+        this.isbn = isbn;
         this.estoque = estoque;
         contadorLivros++;
     }
     // get static
     public static int getContadorLivros(){
-
         return contadorLivros;
     }
 
@@ -49,13 +48,13 @@ public class Livro implements Serializable {
         return titulo;
     }
     // ID
-    public void setId(String id) {
-        this.id = id;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public String getId() {
+    public String getIsbn() {
 
-        return id;
+        return isbn;
     }
     // ESTOQUE
     public void setEstoque(int estoque) {
@@ -75,24 +74,22 @@ public class Livro implements Serializable {
 
     // EXIBIR DETALHES - metodo
     public String exibirDetalhes() {
-        return "---------------------------\n" +
+        return "----------------------------\n" +
                 "Autor: " + autor +
                 "\nTítulo: " + titulo +
-                "\nID: " + id +
-                "\nQuantidade em estoque: " + estoque +
-                "\n------------------------";
+                "\nISBN: " + isbn +
+                "\n----------------------------";
     }
     //sobrecarga
     public String exibirDetalhes(boolean mostrarEstoque) {
-        String detalhes = "---------------------------\n" +
+        String detalhes = "--------------------------\n" +
                 "Autor: " + autor +
                 "\nTítulo: " + titulo +
-                "\nID: " + id;
+                "\nISBN: " + isbn;
 
         if (mostrarEstoque) {
             detalhes += "\nQuantidade em estoque: " + estoque;
         }
-
-        return detalhes + "\n------------------------";
+        return detalhes + "\n---------------------------";
     }
 }

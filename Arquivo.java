@@ -18,7 +18,7 @@ public class Arquivo {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("biblioteca.ser"))) {
             return (Biblioteca) ois.readObject(); // desserializa
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Erro ao carregar a biblioteca. Será iniciada uma nova.");
+            System.out.println(" ");
             return new Biblioteca(); // caso não tenha arquivo ainda
         }
     }

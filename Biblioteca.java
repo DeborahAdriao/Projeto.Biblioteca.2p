@@ -20,19 +20,18 @@ public class Biblioteca implements Serializable {
     //MÉTODOS
     public Livro buscarLivro(String id) {
         for (Livro livro : livros) {
-            if (livro.getId().equals(id)) {
+            if (livro.getIsbn().equals(id)) {
                 return livro;
             }
         }
         return null; // se não achar
     }
-    public void adicionarLivro(Livro livro){
+    public void adicionarLivro(Livro livro) {
         livros.add(livro);
     }
-    public void adicionarLeitor(Leitor leitor){
+    public void adicionarLeitor(Leitor leitor) {
         leitores.add(leitor);
     }
-
 
     public ArrayList<Emprestimo> getEmprestimos() {
         return emprestimos;
@@ -41,6 +40,7 @@ public class Biblioteca implements Serializable {
     public ArrayList<Livro> getLivros() {
         return livros;
     }
+
     public ArrayList<Leitor> getLeitores() {
         return leitores;
     }
