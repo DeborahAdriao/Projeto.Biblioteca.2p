@@ -10,6 +10,6 @@ public class Leitor extends Pessoa{
 
     @Override
     public String exibirInfo() {
-        return super.exibirInfo() + "<3";
+        return super.exibirInfo() + "\n<3";
     }
 }

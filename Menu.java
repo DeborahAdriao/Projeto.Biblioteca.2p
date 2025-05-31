@@ -21,14 +21,14 @@ public class Menu {
         do {
             try {
                 System.out.println("\n---- MENU LIVRARIA ----");
-                System.out.println("1. Cadastrar Livro");
-                System.out.println("2. Cadastrar Leitor");
+                System.out.println("1. Cadastrar livro");
+                System.out.println("2. Cadastrar leitor");
                 System.out.println("3. Listar livros");
                 System.out.println("4. Listar leitores");
-                System.out.println("5. Realizar Empréstimo");
-                System.out.println("6. Registrar Devolução");
-                System.out.println("7. Excluir ou Atualizar cadastro de Livro");
-                System.out.println("8. Excluir ou Atualizar cadstro de Leitor");
+                System.out.println("5. Realizar empréstimo");
+                System.out.println("6. Registrar devolução");
+                System.out.println("7. Excluir ou atualizar cadastro de livro");
+                System.out.println("8. Excluir ou atualizar cadastro de leitor");
                 System.out.println("0. Sair");
 
                 System.out.println("Escolha uma opção: ");
@@ -146,7 +146,7 @@ public class Menu {
         String confirmacao = scanner.nextLine().trim().toUpperCase();
 
         if (confirmacao.equals("S")) {
-            Leitor leitor = new Leitor(nome, cpf, telefone);
+            Pessoa leitor = new Leitor(nome, cpf, telefone);
             biblioteca.adicionarLeitor(leitor);
             System.out.println("Leitor cadastrado com sucesso!");
         } else {
@@ -170,7 +170,7 @@ public class Menu {
 
     private void listarLeitores() {
         System.out.println("--- LEITORES CADASTRADOS ---");
-        for (Leitor leitor : biblioteca.getLeitores()){
+        for (Pessoa leitor : biblioteca.getLeitores()){
             System.out.println(leitor.exibirInfo());
         }
     }
@@ -179,8 +179,8 @@ public class Menu {
         System.out.print("Informe o CPF do leitor: ");
         String cpf = scanner.nextLine().trim();
         // Procura o leitor
-        Leitor leitorSelecionado = null;
-        for (Leitor leitor : biblioteca.getLeitores()) {
+        Pessoa leitorSelecionado = null;
+        for (Pessoa leitor : biblioteca.getLeitores()) {
             if (leitor.getCpf().equals(cpf)) {
                 leitorSelecionado = leitor;
                 break;
@@ -267,6 +267,8 @@ public class Menu {
             String novoTitulo = scanner.nextLine().trim().toUpperCase();
             System.out.print("Novo autor: ");
             String novoAutor = scanner.nextLine().trim().toUpperCase();
+            System.out.println("Novo ISBN: ");
+            String novoIsbn = scanner.nextLine().trim();
             // trocar o isbn
             System.out.print("Novo estoque: ");
             int novoEstoque = scanner.nextInt();
@@ -274,6 +276,7 @@ public class Menu {
 
             livro.setTitulo(novoTitulo);
             livro.setAutor(novoAutor);
+            livro.setIsbn(novoIsbn);
             livro.setEstoque(novoEstoque);
 
             System.out.println("Livro atualizado com sucesso!");
@@ -291,8 +294,8 @@ public class Menu {
             cpf = scanner.nextLine().trim();
         }
 
-        Leitor leitorEncontrado = null;
-        for (Leitor leitor : biblioteca.getLeitores()) {
+        Pessoa leitorEncontrado = null;
+        for (Pessoa leitor : biblioteca.getLeitores()) {
             if (leitor.getCpf().equals(cpf)) {
                 leitorEncontrado = leitor;
                 break;

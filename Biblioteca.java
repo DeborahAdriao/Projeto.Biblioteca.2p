@@ -7,7 +7,7 @@ public class Biblioteca implements Serializable {
     //declarando - atributos
     // ArrayList <TIPO> nome;
     private final ArrayList<Livro> livros;
-    private final ArrayList<Leitor> leitores;
+    private final ArrayList<Pessoa> leitores;
     private final ArrayList<Emprestimo> emprestimos;
 
     public Biblioteca(){
@@ -29,7 +29,7 @@ public class Biblioteca implements Serializable {
     public void adicionarLivro(Livro livro) {
         livros.add(livro);
     }
-    public void adicionarLeitor(Leitor leitor) {
+    public void adicionarLeitor(Pessoa leitor) {
         leitores.add(leitor);
     }
 
@@ -41,7 +41,7 @@ public class Biblioteca implements Serializable {
         return livros;
     }
 
-    public ArrayList<Leitor> getLeitores() {
+    public ArrayList<Pessoa> getLeitores() {
         return leitores;
     }
 }

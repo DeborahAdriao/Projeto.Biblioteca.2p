@@ -4,19 +4,19 @@ import java.time.LocalDate; //representa uma data (ano, mês, dia)
 
 public class Emprestimo implements Serializable{
     //composição: Emprestimo depende diretamente de objetos de outras classes.
-    private final Leitor leitor; //composição
+    private final Pessoa leitor; //composição
     private final Livro livro;
     private final LocalDate dataEmprestimo; //data do empréstimo
     private boolean devolvido;
 
-    public Emprestimo(Leitor leitor, Livro livro) {
+    public Emprestimo(Pessoa leitor, Livro livro) {
         this.leitor = leitor;
         this.livro = livro;
         this.dataEmprestimo = LocalDate.now(); // data atual
         this.devolvido = false; // começa como "não devolvido"
     }
 
-    public Leitor getLeitor() {
+    public Pessoa getLeitor() {
         return leitor;
     }
 
