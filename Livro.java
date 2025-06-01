@@ -3,8 +3,8 @@ package projeto.biblioteca;
 import java.io.Serializable;
 
 public class Livro implements Serializable {
-    private static int contadorLivros = 0; // atributo static
-
+    //static significa que o atributo pertence à classe e não a uma instância específica.
+    private static int contadorLivros = 0;
     private String autor;
     private String titulo;
     private String isbn;
@@ -15,7 +15,6 @@ public class Livro implements Serializable {
     }
 
     public Livro(String autor, String titulo, String isbn, int estoque){
-        // construtor
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -91,6 +90,6 @@ public class Livro implements Serializable {
         if (mostrarEstoque) {
             detalhes += "\nQuantidade em estoque: " + estoque;
         }
-        return detalhes + "\n---------------------------";
+        return detalhes + "\n--------------------------";
     }
 }

@@ -1,6 +1,6 @@
 package projeto.biblioteca;
-import java.io.Serializable; //permite que objetos dessa classe possam ser convertidos em uma sequência de bytes para serem salvos em arquivo
-import java.time.LocalDate; //representa uma data (ano, mês, dia)
+import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Emprestimo implements Serializable{
     //composição: Emprestimo depende diretamente de objetos de outras classes.

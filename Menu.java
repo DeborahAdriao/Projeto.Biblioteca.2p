@@ -2,10 +2,7 @@ package projeto.biblioteca;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
-import java.time.LocalDate;
 import static projeto.biblioteca.Util.*;
-
-// trocar isbn!!!!!!!!!
 
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
@@ -31,7 +28,7 @@ public class Menu {
                 System.out.println("8. Excluir ou atualizar cadastro de leitor");
                 System.out.println("0. Sair");
 
-                System.out.println("Escolha uma opção: ");
+                System.out.println("\nEscolha uma opção: ");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
 
@@ -108,7 +105,7 @@ public class Menu {
                 System.out.println("Deseja tentar novamente? (S/N)");
                 String tentarDeNovo = scanner.nextLine().trim().toUpperCase();
                 if (tentarDeNovo.equals("S")){
-                    cadastrarLivro(); //Chama p metodo dnv
+                    cadastrarLivro();
                 } else {
                     System.out.println("Cadastro cancelado.");
                 }
@@ -120,9 +117,9 @@ public class Menu {
     }
 
     private void cadastrarLeitor() {
-        System.out.print("Nome do leitor: ");
+        System.out.println("Nome do leitor: ");
         String nome = scanner.nextLine().trim().toUpperCase();
-        System.out.print("CPF do leitor: ");
+        System.out.println("CPF do leitor: ");
         String cpf = scanner.nextLine().trim();
 
         while (!validarCPF(cpf)) {
@@ -150,7 +147,7 @@ public class Menu {
             biblioteca.adicionarLeitor(leitor);
             System.out.println("Leitor cadastrado com sucesso!");
         } else {
-            System.out.print("Deseja tentar novamente? (S/N): ");
+            System.out.println("Deseja tentar novamente? (S/N): ");
             String tentarDeNovo = scanner.nextLine().trim().toUpperCase();
             if (tentarDeNovo.equals("S")) {
                 cadastrarLeitor(); // Chama o metodo de novo
@@ -176,7 +173,7 @@ public class Menu {
     }
 
     private void realizarEmprestimo() {
-        System.out.print("Informe o CPF do leitor: ");
+        System.out.println("Informe o CPF do leitor: ");
         String cpf = scanner.nextLine().trim();
         // Procura o leitor
         Pessoa leitorSelecionado = null;
@@ -192,7 +189,7 @@ public class Menu {
         }
         listarLivros();
 
-        System.out.print("\nInforme o ISBN do livro: ");
+        System.out.println("\nInforme o ISBN do livro: ");
         String isbnLivro = scanner.nextLine().trim();
         // Procura o livro
         Livro livroSelecionado = null;
@@ -221,7 +218,7 @@ public class Menu {
     }
 
     private void registrarDevolucao() {
-        System.out.print("Digite o ISBN do livro: ");
+        System.out.println("Digite o ISBN do livro: ");
         String ISBN = scanner.nextLine().trim();
         boolean devolvido = false;
 
@@ -242,7 +239,7 @@ public class Menu {
         }
     }
     private void excluirAtuLivro() {
-        System.out.print("Digite o ISBN do livro: ");
+        System.out.println("Digite o ISBN do livro: ");
         String isbn = scanner.nextLine().trim();
 
         Livro livro = biblioteca.buscarLivro(isbn);
@@ -263,14 +260,14 @@ public class Menu {
             biblioteca.getLivros().remove(livro);
             System.out.println("Livro removido com sucesso!");
         } else if (opcao == 2) {
-            System.out.print("Novo título: ");
+            System.out.println("Novo título: ");
             String novoTitulo = scanner.nextLine().trim().toUpperCase();
-            System.out.print("Novo autor: ");
+            System.out.println("Novo autor: ");
             String novoAutor = scanner.nextLine().trim().toUpperCase();
             System.out.println("Novo ISBN: ");
             String novoIsbn = scanner.nextLine().trim();
             // trocar o isbn
-            System.out.print("Novo estoque: ");
+            System.out.println("Novo estoque: ");
             int novoEstoque = scanner.nextInt();
             scanner.nextLine();
 
@@ -286,7 +283,7 @@ public class Menu {
     }
 
     private void excluirAtuLeitor() {
-        System.out.print("Digite o CPF do leitor: ");
+        System.out.println("Digite o CPF do leitor: ");
         String cpf = scanner.nextLine().trim().toUpperCase();
 
         while (!validarCPF(cpf)) {

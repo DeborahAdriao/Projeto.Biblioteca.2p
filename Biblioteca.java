@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Biblioteca implements Serializable {
     //declarando - atributos
-    // ArrayList <TIPO> nome;
+
     private final ArrayList<Livro> livros;
     private final ArrayList<Pessoa> leitores;
     private final ArrayList<Emprestimo> emprestimos;
@@ -18,9 +18,9 @@ public class Biblioteca implements Serializable {
     }
 
     //MÉTODOS
-    public Livro buscarLivro(String id) {
+    public Livro buscarLivro(String isbn) {
         for (Livro livro : livros) {
-            if (livro.getIsbn().equals(id)) {
+            if (livro.getIsbn().equals(isbn)) {
                 return livro;
             }
         }
